@@ -3,10 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Trainings from './Trainings';
+import { BrowserRouter as Router, 
+  Switch, Route, Link} from "react-router-dom";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+     <Router>
+    <div>
+    <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/trainings">Trainings</Link>
+            </li>
+          </ul>
+        </nav>
+    
+    <Switch>
+    <Route exact path="/"  component={App}/>
+    <Route path = "/trainings" component={Trainings}/>
+   
+    <Route render={() => <h1> Page not  found</h1>}/>
+    </Switch>
+    </div>
+    </Router>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

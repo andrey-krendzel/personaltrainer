@@ -8,6 +8,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Toolbar from '@material-ui/core/Toolbar';
+import { DataGrid } from '@material-ui/data-grid';
+
 
 function App(props) {
   const [update, setUpdate] = useState();
@@ -32,18 +37,17 @@ function App(props) {
         console.log(responseData.content);
         setCustomers(responseData.content);
 
-        console.log(customers);
-
       })
       .catch((error) => console.log(error));
   }, [update]);
+  
 
     //Sort magic
   //Dont execute the function if sortedField isn't modified
   if (sortedField != null) {
     if (direction == "asc") {
       //Asc
-      cars.sort((a, b) => {
+       customers.sort((a, b) => {
         if (a[sortedField] < b[sortedField]) {
           return -1;
         }
@@ -54,7 +58,7 @@ function App(props) {
       });
     } else {
       // Desc
-      cars.sort((a, b) => {
+      customers.sort((a, b) => {
         if (a[sortedField] < b[sortedField]) {
           return 1;
         }
@@ -66,12 +70,47 @@ function App(props) {
     }
   }
 
-    // FILTERRS
+
 
 
 
   return (
     <div className="App">
+
+
+        <TableContainer component={Paper}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID </TableCell>
+            
+            <TableCell align="right">First name</TableCell>
+            <TableCell align="right">Last name</TableCell>
+            <TableCell align="right">Street address</TableCell>
+            <TableCell align="right">Post code</TableCell>
+            <TableCell align="right">City</TableCell>
+            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Phone</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {customers.map((customer, index) => (
+            <TableRow key={index}>
+              <TableCell component="th" scope="row">
+              {customer.links[0].href.split("/")[5]}
+              </TableCell>
+              <TableCell align="right">{customer.firstname}</TableCell>
+              <TableCell align="right">{customer.lastname}</TableCell>
+              <TableCell align="right">{customer.streetaddress}</TableCell>
+              <TableCell align="right">{customer.postcode}</TableCell>
+              <TableCell align="right">{customer.city}</TableCell>
+              <TableCell align="right">{customer.email}</TableCell>
+              <TableCell align="right">{customer.phone}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
      <table>
           <thead>
               <tr>
@@ -125,7 +164,7 @@ function App(props) {
               <button
                 type="button"
                 onClick={() => {
-                  setSortedField("lastname");
+                  setSortedField("streetaddress");
                   setDirection("asc");
                 }}
               >
@@ -135,16 +174,98 @@ function App(props) {
               <button
                 type="button"
                 onClick={() => {
-                  setSortedField("lastname");
+                  setSortedField("streetaddress");
                   setDirection("desc");
                 }}
               >
                 Desc
               </button></th>
-                  <th>Postcode:</th>
-                  <th>City: </th>
-                  <th>Email: </th>
-                  <th>Phone: </th>
+                  <th>Postcode: &nbsp;
+
+                  <button
+                type="button"
+                onClick={() => {
+                  setSortedField("postcode");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("postcode");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button>
+                    
+                  </th>
+                  <th>City:  &nbsp;
+                
+                 <button
+                type="button"
+                onClick={() => {
+                  setSortedField("city");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("city");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button></th>
+                  <th>Email: &nbsp;
+                
+                <button
+               type="button"
+               onClick={() => {
+                 setSortedField("email");
+                 setDirection("asc");
+               }}
+             >
+               Asc
+             </button>
+
+             <button
+               type="button"
+               onClick={() => {
+                 setSortedField("email");
+                 setDirection("desc");
+               }}
+             >
+               Desc
+             </button></th>
+                  <th>Phone: &nbsp;
+                
+                <button
+               type="button"
+               onClick={() => {
+                 setSortedField("phone");
+                 setDirection("asc");
+               }}
+             >
+               Asc
+             </button>
+
+             <button
+               type="button"
+               onClick={() => {
+                 setSortedField("phone");
+                 setDirection("desc");
+               }}
+             >
+               Desc
+             </button></th>
                  <th></th>
                  <th></th>
               </tr>

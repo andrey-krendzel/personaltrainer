@@ -1,0 +1,22 @@
+Uncaught Error: Material-UI: The data grid component requires all rows to have a unique id property.
+A row was provided without id in the rows prop:
+{"firstname":"John","lastname":"Johnson","streetaddress":"5th Street","postcode":"23110","city":"Flintsone","email":"john@mail.com","phone":"232-2345540","content":[],"links":[{"rel":"self","href":"https://customerrest.herokuapp.com/api/customers/1"},{"rel":"customer","href":"https://customerrest.herokuapp.com/api/customers/1"},{"rel":"trainings","href":"https://customerrest.herokuapp.com/api/customers/1/trainings"}]}
+    at Ea (index-esm.js:15)
+    at index-esm.js:15
+    at Array.forEach (<anonymous>)
+    at Fa (index-esm.js:15)
+    at index-esm.js:15
+    at index-esm.js:15
+    at index-esm.js:15
+    at invokePassiveEffectCreate (react-dom.development.js:23487)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:3945)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:3994)
+    at invokeGuardedCallback (react-dom.development.js:4056)
+    at flushPassiveEffectsImpl (react-dom.development.js:23574)
+    at unstable_runWithPriority (scheduler.development.js:646)
+    at runWithPriority$1 (react-dom.development.js:11276)
+    at flushPassiveEffects (react-dom.development.js:23447)
+    at react-dom.development.js:23324
+    at workLoop (scheduler.development.js:590)
+    at flushWork (scheduler.development.js:545)
+    at MessagePort.performWorkUntilDeadline (scheduler.development.js:157)

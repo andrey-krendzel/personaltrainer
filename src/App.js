@@ -23,6 +23,15 @@ function App(props) {
   const [customers, setCustomers] = useState([]);
   const [sortedField, setSortedField] = React.useState();
   const [direction, setDirection] = React.useState();
+  const [filter, setFilter] = React.useState({
+    firstname: "",
+    lastname: "",
+    streetaddress: "",
+    postcode: "",
+    city: "",
+    email: "",
+    phone: ""
+  });
 
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
@@ -89,19 +98,194 @@ function App(props) {
   return (
     <div className="App">
 
-      <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
-            <AgGridReact
-                onGridReady={onGridReady}
-                rowData={customers}>
-             <AgGridColumn field="firstname" sortable={ true } filter={ true }></AgGridColumn>
-             <AgGridColumn field="lastname" sortable={ true } filter={ true }></AgGridColumn>
-             <AgGridColumn field="streetaddress" sortable={ true } filter={ true }></AgGridColumn>
-             <AgGridColumn field="postcode" sortable={ true } filter={ true }></AgGridColumn> 
-             <AgGridColumn field="phone" sortable={ true } filter={ true }></AgGridColumn> 
-             <AgGridColumn field="email" sortable={ true } filter={ true }></AgGridColumn> 
-            
-            </AgGridReact>
-        </div>
+
+
+      <hr ></hr>
+
+<table>
+          <thead>
+              <tr>
+                 <th> ID:</th>
+                 
+                  <th>First name: &nbsp;
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("firstname");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("firstname");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button>
+              </th>
+                  <th>Last name: &nbsp;
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("lastname");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("lastname");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button>
+
+                  </th>
+
+
+                  <th>Street address:  &nbsp;
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("streetaddress");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("streetaddress");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button></th>
+                  <th>Postcode: &nbsp;
+
+                  <button
+                type="button"
+                onClick={() => {
+                  setSortedField("postcode");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("postcode");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button>
+                    
+                  </th>
+                  <th>City:  &nbsp;
+                
+                 <button
+                type="button"
+                onClick={() => {
+                  setSortedField("city");
+                  setDirection("asc");
+                }}
+              >
+                Asc
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("city");
+                  setDirection("desc");
+                }}
+              >
+                Desc
+              </button></th>
+                  <th>Email: &nbsp;
+                
+                <button
+               type="button"
+               onClick={() => {
+                 setSortedField("email");
+                 setDirection("asc");
+               }}
+             >
+               Asc
+             </button>
+
+             <button
+               type="button"
+               onClick={() => {
+                 setSortedField("email");
+                 setDirection("desc");
+               }}
+             >
+               Desc
+             </button></th>
+                  <th>Phone: &nbsp;
+                
+                <button
+               type="button"
+               onClick={() => {
+                 setSortedField("phone");
+                 setDirection("asc");
+               }}
+             >
+               Asc
+             </button>
+
+             <button
+               type="button"
+               onClick={() => {
+                 setSortedField("phone");
+                 setDirection("desc");
+               }}
+             >
+               Desc
+             </button></th>
+                 <th></th>
+                 <th></th>
+              </tr>
+              </thead>
+          {customers.map((customer, index) =>  
+        <tbody>
+        <tr key={index}>
+          <td>{customer.links[0].href.split("/")[5]}</td>
+          <td>{customer.firstname}</td>
+          <td>{customer.lastname}</td>
+          <td>{customer.streetaddress}</td>
+          <td>{customer.postcode}</td>
+          <td>{customer.city}</td>
+          <td>{customer.email}</td>
+          <td>{customer.phone}</td>
+          <td><button>Delete</button></td>
+          <td><button>Edit</button></td>
+          <td><button> <Link
+                      to={{
+                        pathname: "/edit/" + car._links.self.href.split("/")[4],
+                        carId: car._links.self.href.split("/")[4],
+                      }}
+                    >
+                      View
+                    </Link>{" "}</button></td>
+          </tr>
+          </tbody>)}
+          </table> 
 
         
     

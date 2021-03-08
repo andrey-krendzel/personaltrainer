@@ -26,7 +26,7 @@ ReactDOM.render(
     <Switch>
     <Route exact path="/"  component={App}/>
     <Route path = "/trainings" component={Trainings}/>
-   
+    <Route path = "/trainings/:trainingid" component={Trainings_id}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>
     </div>

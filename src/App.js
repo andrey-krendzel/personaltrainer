@@ -18,6 +18,57 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
+function FilterCustomer(props) {
+  return (
+    <div className="filterCustomer">
+      <h1> Filter customer </h1>
+      By first name:{" "}
+      <input
+        onChange={props.firstnameFilterChanged}
+        value={props.filter.firstname}
+      ></input>{" "}
+      <br />
+      By last name:{" "}
+      <input
+        onChange={props.lastnameFilterChanged}
+        value={props.filter.lastname}
+      ></input>{" "}
+      <br />
+      By street address:{" "}
+      <input
+        onChange={props.streetaddressFilterChanged}
+        value={props.filter.streetaddress}
+      ></input>{" "}
+      <br />
+      By postcode:{" "}
+      <input
+        onChange={props.postcodeFilterChanged}
+        value={props.filter.postcode}
+      ></input>{" "}
+      <br />
+      By city{" "}
+      <input
+        onChange={props.cityFilterChanged}
+        value={props.filter.city}
+      ></input>{" "}
+      <br />
+      By email:{" "}
+      <input
+        onChange={props.emailFilterChanged}
+        value={props.filter.email}
+      ></input>{" "}
+            <br />
+      By phone:{" "}
+      <input
+        onChange={props.phoneFilterChanged}
+        value={props.filter.phone}
+      ></input>{" "}
+      &nbsp;
+      <hr></hr>
+    </div>
+  );
+}
+
 function App(props) {
   const [update, setUpdate] = useState();
   const [customers, setCustomers] = useState([]);
@@ -30,7 +81,7 @@ function App(props) {
     postcode: "",
     city: "",
     email: "",
-    phone: ""
+    phone: "",
   });
 
   const [gridApi, setGridApi] = useState(null);
@@ -91,6 +142,31 @@ function App(props) {
     }
   }
 
+  // Filters
+
+  const firstnameFilterChanged = (event) => {
+    setFilter({ ...filter, firstname: event.target.value });
+  };
+
+  const lastnameFilterChanged = (event) => {
+    setFilter({ ...filter, lastname: event.target.value });
+  };
+
+  const streetaddressFilterChanged = (event) => {
+    setFilter({ ...filter, streetaddress: event.target.value });
+  };
+
+  const postcodeFilterChanged = (event) => {
+    setFilter({ ...filter, postcode: event.target.value });
+  };
+
+  const cityFilterChanged = (event) => {
+    setFilter({ ...filter, city: event.target.value });
+  };
+
+  const phoneFilterChanged = (event) => {
+    setFilter({ ...filter, phone: event.target.value });
+  };
 
 
 

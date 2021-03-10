@@ -164,6 +164,11 @@ function App(props) {
     setFilter({ ...filter, city: event.target.value });
   };
 
+  const emailFilterChanged = (event) => {
+    setFilter({ ...filter, city: event.target.value });
+  };
+
+
   const phoneFilterChanged = (event) => {
     setFilter({ ...filter, phone: event.target.value });
   };
@@ -175,7 +180,16 @@ function App(props) {
     <div className="App">
 
 
-
+<FilterCustomer
+            firstnameFilterChanged={firstnameFilterChanged}
+            lastnameFilterChanged={lastnameFilterChanged}
+            streetaddressFilterChanged={streetaddressFilterChanged}
+            postcodeFilterChanged={postcodeFilterChanged}
+            cityFilterChanged={cityFilterChanged}
+            emailFilterChanged={emailFilterChanged}
+            phoneFilterChanged={phoneFilterChanged}
+            filter={filter}
+          />
       <hr ></hr>
 
 <table>
@@ -338,7 +352,14 @@ function App(props) {
                  <th></th>
               </tr>
               </thead>
-          {customers.map((customer, index) =>  
+          {customers
+          .filter((customer) => customer.firstname.toLowerCase().includes(filter.firstname.toLowerCase()))
+          .filter((customer) => customer.lastname.toLowerCase().includes(filter.lastname.toLowerCase()))
+          .filter((customer) => customer.streetaddress.toLowerCase().includes(filter.streetaddress.toLowerCase()))
+          .filter((customer) => customer.postcode.toLowerCase().includes(filter.postcode.toLowerCase()))
+          .filter((customer) => customer.city.toLowerCase().includes(filter.city.toLowerCase()))
+          .filter((customer) => customer.email.toLowerCase().includes(filter.email.toLowerCase()))
+          .map((customer, index) =>  
         <tbody>
         <tr key={index}>
           <td>{customer.links[0].href.split("/")[5]}</td>

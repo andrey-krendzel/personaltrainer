@@ -31,6 +31,7 @@ function Trainings(props) {
       .catch((error) => console.log(error));
   }, [update]);
 
+
     //Sort magic
   //Dont execute the function if sortedField isn't modified
   if (sortedField != null) {
@@ -59,6 +60,28 @@ function Trainings(props) {
     }
   }
 
+  const deleteFunction = (trainingId, actualIndex) => {
+    
+
+    var r = window.confirm("Are you sure you want to delete this training?");
+
+    if (r == true) {
+    const requestOptions = {
+      method: "DELETE",
+    };
+
+    //Delete from Server
+    fetch("https://customerrest.herokuapp.com/api/trainings/" + trainingId, requestOptions);
+
+    // Client-side delete:
+    // customerId = Server Id != index
+    const newTrainingsList = trainings.filter((item, index) => index !== actualIndex);
+    setTrainings(newTrainingsList);
+  } else {
+    alert("No customer was deleted!")
+  }
+  };
+
 
   return (
     <div className="Trainings">
@@ -66,7 +89,6 @@ function Trainings(props) {
           <thead>
               <tr>
                   <th>Training ID </th>
-                  <th>Customer ID </th>
                   <th>Date &nbsp;
               <button
                 type="button"
@@ -132,11 +154,10 @@ function Trainings(props) {
         <tbody>
         <tr key={index}>
           <td>{training.links[0].href.split("/")[5]}</td>
-          <td>{training.links[2].href.split("/")[5]}</td>
           <td>{training.date}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>
-          <td><button>Delete</button></td>
+          <td><button onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</button></td>
           <td><button>Edit</button></td>
           </tr>
           </tbody>)}

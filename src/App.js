@@ -11,8 +11,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import { Link } from "react-router-dom";
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+
 
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -165,7 +166,7 @@ function App(props) {
   };
 
   const emailFilterChanged = (event) => {
-    setFilter({ ...filter, city: event.target.value });
+    setFilter({ ...filter, cemail: event.target.value });
   };
 
 
@@ -374,11 +375,11 @@ function App(props) {
           <td><button>Edit</button></td>
           <td><button> <Link
                       to={{
-                        pathname: "/edit/" + car._links.self.href.split("/")[4],
-                        carId: car._links.self.href.split("/")[4],
+                        pathname: "/customer/" + customer.links[0].href.split("/")[5],
+                        customerId: customer.links[0].href.split("/")[5],
                       }}
                     >
-                      View
+                      View Trainings
                     </Link>{" "}</button></td>
           </tr>
           </tbody>)}

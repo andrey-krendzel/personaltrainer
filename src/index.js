@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Trainings from './Trainings';
 import { BrowserRouter as Router, 
   Switch, Route, Link} from "react-router-dom";
+import Trainings_customer from './Trainings_customer';
 
 
 ReactDOM.render(
@@ -15,10 +16,10 @@ ReactDOM.render(
     <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">All customers</Link>
             </li>
             <li>
-              <Link to="/trainings">Trainings</Link>
+              <Link to="/trainings">All trainings</Link>
             </li>
           </ul>
         </nav>
@@ -26,7 +27,7 @@ ReactDOM.render(
     <Switch>
     <Route exact path="/"  component={App}/>
     <Route path = "/trainings" component={Trainings}/>
-    <Route path = "/trainings/:trainingid" component={Trainings_id}/>
+    <Route path = "/customer/:customerId" component={Trainings_customer}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>
     </div>
@@ -39,4 +40,5 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

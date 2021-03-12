@@ -3,6 +3,36 @@ import './App.css';
 import { useState } from "react";
 import React from "react";
 
+function FilterTraining(props) {
+  return (
+    <div className="filterTraining">
+      <h1> Filter training </h1>
+      By date:{" "}
+      <input
+        onChange={props.dateFilterChanged}
+        value={props.filter.date}
+      ></input>{" "}
+      <br />
+      By duration: Min{" "}
+    <input
+      onChange={props.minDurationChanged}
+      value={props.filter.duration.min}
+    ></input>{" "}
+    Max{" "}
+    <input
+      onChange={props.maxDurationChanged}
+      value={props.filter.duration.max}
+    ></input>{" "}
+    <br />
+      By activity:{" "}
+      <input
+        onChange={props.activityFilterChanged}
+        value={props.filter.activity}
+      ></input>{" "}
+      <br />
+      </div>
+      )
+}
 
 function Trainings(props) {
   const [update, setUpdate] = useState();
@@ -15,36 +45,7 @@ function Trainings(props) {
     activity: "",
   });
 
-  function FilterTraining(props) {
-    return (
-      <div className="filterTraining">
-        <h1> Filter training </h1>
-        By date:{" "}
-        <input
-          onChange={props.dateFilterChanged}
-          value={props.filter.date}
-        ></input>{" "}
-        <br />
-        By duration: Min{" "}
-      <input
-        onChange={props.minDurationChanged}
-        value={props.filter.duration.min}
-      ></input>{" "}
-      Max{" "}
-      <input
-        onChange={props.maxDurationChanged}
-        value={props.filter.duration.max}
-      ></input>{" "}
-      <br />
-        By activity:{" "}
-        <input
-          onChange={props.activityFilterChanged}
-          value={props.filter.activity}
-        ></input>{" "}
-        <br />
-        </div>
-        )
-  }
+
     //Errors for fetch
     function handleErrors(response) {
       if (!response.ok) {
@@ -122,14 +123,14 @@ function Trainings(props) {
   const maxDurationChanged = (event) => {
     setFilter({
       ...filter,
-      price: { min: filter.duration.min, max: event.target.value },
+      duration: { min: filter.duration.min, max: event.target.value },
     });
   };
 
   const minDurationChanged = (event) => {
     setFilter({
       ...filter,
-      price: { max: filter.duration.max, min: event.target.value },
+      duration: { max: filter.duration.max, min: event.target.value },
     });
   };
 
@@ -214,12 +215,12 @@ function Trainings(props) {
               </tr>
               </thead>
           {trainings
-          .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase())
+          .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase()))
           .filter(
             (training) =>
               training.duration > filter.duration.min && training.duration < filter.duration.max
           )
-          .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase())
+          .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
           .map((training, index) =>  
         <tbody>
         <tr key={index}>
@@ -230,7 +231,7 @@ function Trainings(props) {
           <td><button onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</button></td>
           <td><button>Edit</button></td>
           </tr>
-          </tbody>)))}
+          </tbody>)}
           </table> 
     </div>
   );

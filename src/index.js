@@ -21,9 +21,9 @@ ReactDOM.render(
     <Navbar.Brand href="#home">PersonalTrainer</Navbar.Brand>
     <Nav className="mr-auto">
     
-      <Nav.Link>  <Link to="/">All customers</Link></Nav.Link>
-      <Nav.Link> <Link to="/trainings">All trainings</Link></Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <Nav.Link>  <Link to="/" class="nav-link">All customers</Link></Nav.Link>
+      <Nav.Link> <Link to="/trainings" class="nav-link">All trainings</Link></Nav.Link>
+      <Nav.Link> <Link to="/pricing" class="nav-link">Pricing</Link></Nav.Link>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -36,6 +36,7 @@ ReactDOM.render(
     <Route exact path="/"  component={App}/>
     <Route path = "/trainings" component={Trainings}/>
     <Route path = "/customer/:customerId" component={Trainings_customer}/>
+    <Route path = "/pricing" component={Trainings}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>
     </div>

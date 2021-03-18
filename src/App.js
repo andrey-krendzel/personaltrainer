@@ -2,19 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import React from "react";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
+
 import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
+import { Button, Table } from 'react-bootstrap';
 
 
 function FilterCustomer(props) {
@@ -204,35 +197,35 @@ function App(props) {
          {tabValue === "two" && ( <p>Add customer placeolder</p> )}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
 
-      <hr ></hr>
+  
 
-<table>
+      <Table striped bordered hover>
           <thead>
               <tr>
-                 <th> ID:</th>
+                 <th> ID</th>
                  
-                  <th>First name: &nbsp;
-              <button
-                type="button"
+                  <th>First name &nbsp;
+              <Button
+                variant="outline-primary"
                 onClick={() => {
                   setSortedField("firstname");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-
-              <button
-                type="button"
+              </Button>
+                &nbsp;
+              <Button
+                variant="outline-primary"
                 onClick={() => {
                   setSortedField("firstname");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button>
+              </Button>
               </th>
-                  <th>Last name: &nbsp;
+                  <th>Last name &nbsp;
               <button
                 type="button"
                 onClick={() => {
@@ -256,7 +249,7 @@ function App(props) {
                   </th>
 
 
-                  <th>Street address:  &nbsp;
+                  <th>Street address  &nbsp;
               <button
                 type="button"
                 onClick={() => {
@@ -276,7 +269,7 @@ function App(props) {
               >
                 Desc
               </button></th>
-                  <th>Postcode: &nbsp;
+                  <th>Postcode &nbsp;
 
                   <button
                 type="button"
@@ -299,7 +292,7 @@ function App(props) {
               </button>
                     
                   </th>
-                  <th>City:  &nbsp;
+                  <th>City  &nbsp;
                 
                  <button
                 type="button"
@@ -320,7 +313,7 @@ function App(props) {
               >
                 Desc
               </button></th>
-                  <th>Email: &nbsp;
+                  <th>Email &nbsp;
                 
                 <button
                type="button"
@@ -341,7 +334,7 @@ function App(props) {
              >
                Desc
              </button></th>
-                  <th>Phone: &nbsp;
+                  <th>Phone &nbsp;
                 
                 <button
                type="button"
@@ -396,7 +389,7 @@ function App(props) {
                     </Link>{" "}</button></td>
           </tr>
           </tbody>)}
-          </table> 
+          </Table> 
 
         
     

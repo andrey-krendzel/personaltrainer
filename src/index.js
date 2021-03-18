@@ -7,47 +7,29 @@ import Trainings from './Trainings';
 import { BrowserRouter as Router, 
   Switch, Route, Link} from "react-router-dom";
 import Trainings_customer from './Trainings_customer';
-import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
-import styled from 'styled-components';
+import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Styles = styled.div`
-  .navbar { background-color: #222; }
-  a, .navbar-nav, .navbar-light .nav-link {
-    color: #9FFFCB;
-    &:hover { color: white; }
-  }
-  .navbar-brand {
-    font-size: 1.4em;
-    color: #9FFFCB;
-    &:hover { color: white; }
-  }
-  .form-center {
-    position: absolute !important;
-    left: 25%;
-    right: 25%;
-  }
-`;
+
 
 ReactDOM.render(
   <React.StrictMode>
      <Router>
     <div>
       
-    <Styles>
-    <Navbar expand="lg">
-      <Navbar.Brand href="/">Tutorial</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-      <Form className="form-center">
-        <FormControl type="text" placeholder="Search" className="" />
-      </Form>
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
+    <Navbar bg="primary" variant="dark">
+    <Navbar.Brand href="#home">PersonalTrainer</Navbar.Brand>
+    <Nav className="mr-auto">
+    
+      <Nav.Link>  <Link to="/">All customers</Link></Nav.Link>
+      <Nav.Link> <Link to="/trainings">All trainings</Link></Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-light">Search</Button>
+    </Form>
+  </Navbar>
 
     
     <Switch>

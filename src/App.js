@@ -12,12 +12,10 @@ import Paper from '@material-ui/core/Paper';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from "react-router-dom";
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import AppBar from "@material-ui/core/AppBar";
 
-
-import 'ag-grid-enterprise';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 function FilterCustomer(props) {
   return (
@@ -84,6 +82,7 @@ function App(props) {
     email: "",
     phone: "",
   });
+  const [tabValue, setTabValue] = useState("one");
 
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
@@ -174,23 +173,38 @@ function App(props) {
     setFilter({ ...filter, phone: event.target.value });
   };
 
+  // Tabs
+  const handleTabChange = (event, tabValue) => {
+    setTabValue(tabValue);
+  };
 
 
 
   return (
     <div className="App">
 
+<AppBar position="static">
+          <Tabs value={tabValue} onChange={handleTabChange}>
+            <Tab value="one" label="View customers" />
+            <Tab value="two" label="Add customers" />
+            <Tab value="three" label="Export customers" />
+          </Tabs>
+        </AppBar>
+        {tabValue === "one" && (
+          <FilterCustomer
+          firstnameFilterChanged={firstnameFilterChanged}
+          lastnameFilterChanged={lastnameFilterChanged}
+          streetaddressFilterChanged={streetaddressFilterChanged}
+          postcodeFilterChanged={postcodeFilterChanged}
+          cityFilterChanged={cityFilterChanged}
+          emailFilterChanged={emailFilterChanged}
+          phoneFilterChanged={phoneFilterChanged}
+          filter={filter}
+        />
+        )}
+         {tabValue === "two" && ( <p>Add customer placeolder</p> )}
+         {tabValue === "three" && ( <p>Export customer placeolder</p> )}
 
-<FilterCustomer
-            firstnameFilterChanged={firstnameFilterChanged}
-            lastnameFilterChanged={lastnameFilterChanged}
-            streetaddressFilterChanged={streetaddressFilterChanged}
-            postcodeFilterChanged={postcodeFilterChanged}
-            cityFilterChanged={cityFilterChanged}
-            emailFilterChanged={emailFilterChanged}
-            phoneFilterChanged={phoneFilterChanged}
-            filter={filter}
-          />
       <hr ></hr>
 
 <table>

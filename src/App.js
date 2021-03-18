@@ -63,7 +63,6 @@ function FilterCustomer(props) {
         value={props.filter.phone}
       ></input>{" "}
       &nbsp;
-      <hr></hr>
     </div>
   );
 }

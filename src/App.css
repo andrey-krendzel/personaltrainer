@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.filterCustomer {
+  text-align: left;
+  margin-left: 5%; 
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

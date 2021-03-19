@@ -43,9 +43,13 @@
   color: #61dafb;
 }
 
-.filterCustomer {
+.filterCustomer,.addCustomer {
   text-align: left;
   
+}
+
+.addCustomer {
+  margin-left: 2%;
 }
 
 @keyframes App-logo-spin {

@@ -14,52 +14,60 @@ import { Button, Table, Card, Accordion } from 'react-bootstrap';
 function AddCustomer(props) {
   return (
     <div className="addCustomer">
-      <h1> Add new customer </h1>
+      <br />
+      <h2> Add new customer </h2>
       <TextField
         name="firstname"
-        label="Firstname"
+        label="First name"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.firstname}
       />
+      <br />
       <TextField
-        name="model"
-        label="Model"
+        name="lastname"
+        label="Last name"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.lastname}
       />
+      <br />
       <TextField
-        name="color"
-        label="Color"
+        name="streetaddress"
+        label="Street address"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.streetaddress}
       />
+       <br />
       <TextField
-        name="fuel"
-        label="Fuel"
+        name="postcode"
+        label="Post code"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.postcode}
       />
+       <br />
       <TextField
-        name="price"
-        label="Price"
+        name="city"
+        label="City"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.city}
       />
+       <br />
       <TextField
-        name="year"
-        label="Year"
+        name="email"
+        label="Email"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.email}
       />
+       <br />
             <TextField
-        name="year"
-        label="Year"
+        name="phone"
+        label="Phone"
         onChange={props.addCustomerInputChanged}
         value={props.newCustomer.phone}
       />
-
-      <Button onClick={props.addCar} variant="contained" color="primary">
-        Add
+      <br />
+      <br />
+      <Button onClick={props.addCustomer} variant="primary" >
+        Add customer
       </Button>
       <hr></hr>
     </div>
@@ -154,7 +162,15 @@ function App(props) {
     phone: "",
   });
   const [tabValue, setTabValue] = useState("one");
-  const [newCustomer, setNewCustomer] = React.useState();
+  const [newCustomer, setNewCustomer] = useState({
+    firstname: "",
+    lastname: "",
+    streetaddress: "",
+    postcode: "",
+    city: "",
+    email: "",
+    phone: ""
+  });
 
 
     //Errors for fetch
@@ -247,6 +263,41 @@ function App(props) {
     setNewCustomer({ ...newCustomer, [event.target.name]: event.target.value });
   };
 
+  // ADD CUSTOMER
+  const addCustomer = (event) => {
+    event.preventDefault();
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstname: newCustomer.firstname,
+        lastname: newCustomer.lastname,
+        streetaddress: newCustomer.streetaddress,
+        postcode: newCustomer.postcode,
+        city: newCustomer.city,
+        email: newCustomer.email,
+        phone: newCustomer.phone
+      }),
+    };
+    fetch("http://carrestapi.herokuapp.com/cars/", requestOptions)
+      .then(handleErrors)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+
+    setUpdate(1);
+    setNewCustomer({
+      firstname: "",
+      lastname: "",
+      streetaddress: "",
+      postcode: "",
+      city: "",
+      email: "",
+      phone: ""
+    });
+  };
+
 
 
   return (
@@ -271,7 +322,7 @@ function App(props) {
           filter={filter}
         />
         )}
-         {tabValue === "two" && ( <p>Add customer placeolder</p> )}
+         {tabValue === "two" && ( <AddCustomer newCustomer={newCustomer} addCustomerInputChanged={addCustomerInputChanged} addCustomer={addCustomer} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
 
   

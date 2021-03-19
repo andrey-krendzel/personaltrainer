@@ -55,12 +55,12 @@ function Trainings(props) {
     }
 
   React.useEffect(() => {
-    fetch("https://customerrest.herokuapp.com/api/trainings")
+    fetch("https://customerrest.herokuapp.com/gettrainings")
       .then(handleErrors)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData.content);
-        setTrainings(responseData.content);
+        console.log(responseData);
+        setTrainings(responseData);
 
         console.log(trainings);
       })
@@ -153,6 +153,7 @@ function Trainings(props) {
           <thead>
               <tr>
                   <th>Training ID </th>
+                  <th>Customer ID </th>
                   <th>Date &nbsp;
               <button
                 type="button"
@@ -224,7 +225,8 @@ function Trainings(props) {
           .map((training, index) =>  
         <tbody>
         <tr key={index}>
-          <td>{training.links[0].href.split("/")[5]}</td>
+          <td>{training.id}</td>
+          <td>{training.customer.id}</td>
           <td>{training.date}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>

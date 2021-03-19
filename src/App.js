@@ -7,55 +7,77 @@ import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Card, Accordion } from 'react-bootstrap';
 
 
 function FilterCustomer(props) {
   return (
-    <div className="filterCustomer">
-      <h1> Filter customer </h1>
-      By first name:{" "}
-      <input
+    <div class="filterCustomer">
+    <Accordion>
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+        Filter customers
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>      <h2> Filter customers </h2><br />
+      <table>
+        <tr>
+      <td>By first name:{" "}</td>
+      <td><input
         onChange={props.firstnameFilterChanged}
         value={props.filter.firstname}
-      ></input>{" "}
+      ></input>{" "}</td></tr>
       <br />
-      By last name:{" "}
-      <input
+      <tr>
+      <td> By last name:{" "}</td>
+      <td><input
         onChange={props.lastnameFilterChanged}
         value={props.filter.lastname}
-      ></input>{" "}
+      ></input>{" "}</td></tr>
       <br />
-      By street address:{" "}
-      <input
+      <tr>
+      <td>By street address:&nbsp;{" "}</td>
+      <td><input
         onChange={props.streetaddressFilterChanged}
         value={props.filter.streetaddress}
-      ></input>{" "}
+      ></input>{" "}</td>
+      </tr>
       <br />
-      By postcode:{" "}
-      <input
+      <tr>
+      <td>By postcode:{" "}</td>
+      <td><input
         onChange={props.postcodeFilterChanged}
         value={props.filter.postcode}
-      ></input>{" "}
+      ></input>{" "}</td> </tr>
       <br />
-      By city{" "}
-      <input
+      <tr>
+      <td>By city:{" "}</td>
+      <td><input
         onChange={props.cityFilterChanged}
         value={props.filter.city}
-      ></input>{" "}
+      ></input>{" "}</td></tr>
       <br />
-      By email:{" "}
-      <input
+      <tr><td>
+      By email:{" "}</td>
+      <td><input
         onChange={props.emailFilterChanged}
         value={props.filter.email}
-      ></input>{" "}
+      ></input>{" "}</td></tr>
             <br />
-      By phone:{" "}
-      <input
+            <tr>  <td>By phone:{" "}</td>
+            <td><input
         onChange={props.phoneFilterChanged}
         value={props.filter.phone}
-      ></input>{" "}
-      &nbsp;
+      ></input>{" "}</td></tr>
+      </table>
+      &nbsp;</Card.Body>
+    </Accordion.Collapse>
+  </Card>
+ 
+</Accordion>
+   
     </div>
   );
 }

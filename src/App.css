@@ -29,6 +29,16 @@
   text-decoration: none;
 }
 
+.link{
+  color:white; 
+
+}
+
+.link:hover{
+  color:white;
+  text-decoration: none;
+}
+
 .App-link {
   color: #61dafb;
 }

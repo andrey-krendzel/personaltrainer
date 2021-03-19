@@ -7,7 +7,64 @@ import { Link } from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
+import TextField from "@material-ui/core/TextField"
 import { Button, Table, Card, Accordion } from 'react-bootstrap';
+
+
+function AddCustomer(props) {
+  return (
+    <div className="addCustomer">
+      <h1> Add new customer </h1>
+      <TextField
+        name="firstname"
+        label="Firstname"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.firstname}
+      />
+      <TextField
+        name="model"
+        label="Model"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.lastname}
+      />
+      <TextField
+        name="color"
+        label="Color"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.streetaddress}
+      />
+      <TextField
+        name="fuel"
+        label="Fuel"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.postcode}
+      />
+      <TextField
+        name="price"
+        label="Price"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.city}
+      />
+      <TextField
+        name="year"
+        label="Year"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.email}
+      />
+            <TextField
+        name="year"
+        label="Year"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.phone}
+      />
+
+      <Button onClick={props.addCar} variant="contained" color="primary">
+        Add
+      </Button>
+      <hr></hr>
+    </div>
+  );
+}
 
 
 function FilterCustomer(props) {
@@ -97,14 +154,7 @@ function App(props) {
     phone: "",
   });
   const [tabValue, setTabValue] = useState("one");
-
-  const [gridApi, setGridApi] = useState(null);
-  const [gridColumnApi, setGridColumnApi] = useState(null);
-
-  const onGridReady = params => {
-    setGridApi(params.api);
-    setGridColumnApi(params.columnApi);
-}
+  const [newCustomer, setNewCustomer] = React.useState();
 
 
     //Errors for fetch
@@ -192,6 +242,11 @@ function App(props) {
     setTabValue(tabValue);
   };
 
+  // Add new customer: handle input changed
+  const addCustomerInputChanged = (event) => {
+    setNewCustomer({ ...newCustomer, [event.target.name]: event.target.value });
+  };
+
 
 
   return (
@@ -229,6 +284,7 @@ function App(props) {
                   <th>First name &nbsp;
               <Button
                 variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("firstname");
                   setDirection("asc");
@@ -239,6 +295,7 @@ function App(props) {
                 &nbsp;
               <Button
                 variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("firstname");
                   setDirection("desc");
@@ -248,135 +305,147 @@ function App(props) {
               </Button>
               </th>
                   <th>Last name &nbsp;
-              <button
-                type="button"
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("lastname");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-
-              <button
-                type="button"
+              </Button>
+              &nbsp;
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("lastname");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button>
+              </Button>
 
                   </th>
 
 
                   <th>Street address  &nbsp;
-              <button
-                type="button"
+                  <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("streetaddress");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-
-              <button
-                type="button"
+              </Button>
+              &nbsp;
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("streetaddress");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th>Postcode &nbsp;
 
-                  <button
-                type="button"
+                  <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("postcode");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-
-              <button
-                type="button"
+                </Button>
+                &nbsp;
+                <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("postcode");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button>
+                </Button>
                     
                   </th>
                   <th>City  &nbsp;
                 
-                 <button
-                type="button"
+                  <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("city");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-
-              <button
-                type="button"
+                </Button>
+                &nbsp;
+                <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("city");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+                </Button></th>
                   <th>Email &nbsp;
                 
-                <button
-               type="button"
+                  <Button
+                variant="outline-primary"
+                size="sm"
                onClick={() => {
                  setSortedField("email");
                  setDirection("asc");
                }}
              >
                Asc
-             </button>
-
-             <button
-               type="button"
+               </Button>
+               &nbsp;
+               <Button
+                variant="outline-primary"
+                size="sm"
                onClick={() => {
                  setSortedField("email");
                  setDirection("desc");
                }}
              >
                Desc
-             </button></th>
+               </Button></th>
                   <th>Phone &nbsp;
-                
-                <button
-               type="button"
+                  
+                  <Button
+                variant="outline-primary"
+                size="sm"
                onClick={() => {
                  setSortedField("phone");
                  setDirection("asc");
                }}
              >
                Asc
-             </button>
-
-             <button
-               type="button"
+               </Button>
+               &nbsp;
+               <Button
+                variant="outline-primary"
+                size="sm"
                onClick={() => {
                  setSortedField("phone");
                  setDirection("desc");
                }}
              >
                Desc
-             </button></th>
+               </Button></th>
                  <th></th>
                  <th></th>
               </tr>
@@ -399,16 +468,16 @@ function App(props) {
           <td>{customer.city}</td>
           <td>{customer.email}</td>
           <td>{customer.phone}</td>
-          <td><button>Delete</button></td>
-          <td><button>Edit</button></td>
-          <td><button> <Link
+          <td><Button variant="danger">Delete</Button></td>
+          <td><Button variant="secondary">Edit</Button></td>
+          <td><Button variant="primary"> <Link class="link"
                       to={{
                         pathname: "/customer/" + customer.links[0].href.split("/")[5],
                         customerId: customer.links[0].href.split("/")[5],
                       }}
                     >
                       View Trainings
-                    </Link>{" "}</button></td>
+                    </Link>{" "}</Button></td>
           </tr>
           </tbody>)}
           </Table> 

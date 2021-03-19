@@ -148,7 +148,7 @@ function FilterCustomer(props) {
 }
 
 function App(props) {
-  const [update, setUpdate] = useState();
+  const [update, setUpdate] = useState(0);
   const [customers, setCustomers] = useState([]);
   const [sortedField, setSortedField] = React.useState();
   const [direction, setDirection] = React.useState();
@@ -280,13 +280,13 @@ function App(props) {
         phone: newCustomer.phone
       }),
     };
-    fetch("http://carrestapi.herokuapp.com/cars/", requestOptions)
+    fetch("https://customerrest.herokuapp.com/api/customers", requestOptions)
       .then(handleErrors)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
 
-    setUpdate(1);
+    setUpdate(1)
     setNewCustomer({
       firstname: "",
       lastname: "",

@@ -2,22 +2,101 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import React from "react";
+import { Button, Table, Card, Accordion } from 'react-bootstrap';
+import TextField from "@material-ui/core/TextField"
 
-function FilterTraining(props) {
+function AddTrainings(props) {
   return (
-    <div className="filterTraining">
+    <div className="addTraining">
+      <br />
+      <h2> Add new training </h2>
+      <TextField
+        name="customerid"
+        label="Customer ID"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.firstname}
+      />
+      <br />
+      <TextField
+        name="lastname"
+        label="Last name"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.lastname}
+      />
+      <br />
+      <TextField
+        name="streetaddress"
+        label="Street address"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.streetaddress}
+      />
+       <br />
+      <TextField
+        name="postcode"
+        label="Post code"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.postcode}
+      />
+       <br />
+      <TextField
+        name="city"
+        label="City"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.city}
+      />
+       <br />
+      <TextField
+        name="email"
+        label="Email"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.email}
+      />
+       <br />
+            <TextField
+        name="phone"
+        label="Phone"
+        onChange={props.addCustomerInputChanged}
+        value={props.newCustomer.phone}
+      />
+      <br />
+      <br />
+      <Button onClick={props.addTraining} variant="primary" >
+        Add training
+      </Button>
+      <hr></hr>
+    </div>
+  );
+}
+
+function FilterTrainings(props) {
+  return (
+    <div className="filterTrainings">
+          <Accordion>
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+        Filter customers
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>  
       <h1> Filter training </h1>
-      By date:{" "}
-      <input
+      <table>
+        <tr>
+      <td>By date:{" "}</td>
+      <td><input
         onChange={props.dateFilterChanged}
         value={props.filter.date}
-      ></input>{" "}
+      ></input>{" "}</td>
+      </tr>
       <br />
-      By duration: Min{" "}
-    <input
+      <tr>
+      <td>  By duration: Min{" "}</td>
+      <td>  <input
       onChange={props.minDurationChanged}
       value={props.filter.duration.min}
-    ></input>{" "}
+    ></input>{" "}</td>
+    </tr>
     Max{" "}
     <input
       onChange={props.maxDurationChanged}
@@ -30,14 +109,26 @@ function FilterTraining(props) {
         value={props.filter.activity}
       ></input>{" "}
       <br />
+      </table>
+      </Card.Body>
+    </Accordion.Collapse>
+  </Card>
+ 
+</Accordion>
       </div>
       )
 }
 
 function Trainings(props) {
-  const [update, setUpdate] = useState();
+  const [update, setUpdate] = useState(0);
   const [trainings, setTrainings] = useState([]);
   const [sortedField, setSortedField] = React.useState();
+  const [newTraining, setNewTraining] = useState({
+    customerId: "",
+    duration: "",
+    activity: "",
+    date: "",
+  });
   const [direction, setDirection] = React.useState();
   const [filter, setFilter] = React.useState({
     date: "",
@@ -118,6 +209,42 @@ function Trainings(props) {
   }
   };
 
+// Add new training: handle input changed
+const addTrainingInputChanged = (event) => {
+  setNewTraining({ ...newTraining, [event.target.name]: event.target.value });
+};
+
+// ADD TRAINING
+const addTraining = (event) => {
+  event.preventDefault();
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      customer: "https://customerrest.herokuapp.com/api/customers" + newTraining.customerId,
+      duration: newTraining.duration,
+      activity: newTraining.activity,
+      date: newTraining.date
+    }),
+  };
+  fetch("https://customerrest.herokuapp.com/api/customers", requestOptions)
+    .then(handleErrors)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+
+  setUpdate(1)
+  setNewCustomer({
+    customerId: "",
+    duration: "",
+    activity: "",
+    date: ""
+  });
+};
+
+
+
   // Filters
 
   const maxDurationChanged = (event) => {
@@ -147,7 +274,7 @@ function Trainings(props) {
 
   return (
     <div className="Trainings">
-      <FilterTraining filter={filter} maxDurationChanged={maxDurationChanged} minDurationChanged={minDurationChanged} activityFilterChanged={activityFilterChanged} dateFilterChanged={dateFilterChanged}/>
+      <FilterTrainings filter={filter} maxDurationChanged={maxDurationChanged} minDurationChanged={minDurationChanged} activityFilterChanged={activityFilterChanged} dateFilterChanged={dateFilterChanged}/>
 <hr></ hr>
      <table>
           <thead>

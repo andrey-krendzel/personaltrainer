@@ -3,7 +3,7 @@ import './App.css';
 import { useState } from "react";
 import React from "react";
 import { Button, Table, Card, Accordion } from 'react-bootstrap';
-import TextField from "@material-ui/core/TextField"
+import TextField from "@material-ui/core/TextField";
 
 function AddTrainings(props) {
   return (
@@ -13,50 +13,29 @@ function AddTrainings(props) {
       <TextField
         name="customerid"
         label="Customer ID"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.firstname}
+        onChange={props.addTrainingInputChanged}
+        value={props.newTraining.customerId}
       />
       <br />
       <TextField
-        name="lastname"
-        label="Last name"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.lastname}
+        name="duration"
+        label="Duration of training"
+        onChange={props.addTrainingInputChanged}
+        value={props.newTraining.duration}
       />
       <br />
       <TextField
-        name="streetaddress"
-        label="Street address"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.streetaddress}
+        name="activity"
+        label="Activity"
+        onChange={props.addTrainingInputChanged}
+        value={props.newTraining.activity}
       />
        <br />
       <TextField
-        name="postcode"
-        label="Post code"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.postcode}
-      />
-       <br />
-      <TextField
-        name="city"
-        label="City"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.city}
-      />
-       <br />
-      <TextField
-        name="email"
-        label="Email"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.email}
-      />
-       <br />
-            <TextField
-        name="phone"
-        label="Phone"
-        onChange={props.addCustomerInputChanged}
-        value={props.newCustomer.phone}
+        name="date"
+        label="Date"
+        onChange={props.addTrainingInputChanged}
+        value={props.newTraining.date}
       />
       <br />
       <br />
@@ -129,6 +108,7 @@ function Trainings(props) {
     activity: "",
     date: "",
   });
+  const [tabValue, setTabValue] = useState("one");
   const [direction, setDirection] = React.useState();
   const [filter, setFilter] = React.useState({
     date: "",
@@ -235,13 +215,16 @@ const addTraining = (event) => {
     .catch((error) => console.log(error));
 
   setUpdate(1)
-  setNewCustomer({
+  setNewTraining({
     customerId: "",
     duration: "",
     activity: "",
     date: ""
   });
 };
+
+// Tabs
+
 
 
 
@@ -274,6 +257,27 @@ const addTraining = (event) => {
 
   return (
     <div className="Trainings">
+      <AppBar position="static">
+          <Tabs value={tabValue} onChange={handleTabChange}>
+            <Tab value="one" label="View trainings" />
+            <Tab value="two" label="Add trainings" />
+            <Tab value="three" label="Export trainings" />
+          </Tabs>
+        </AppBar>
+        {tabValue === "one" && (
+          <FilterCustomer
+          firstnameFilterChanged={firstnameFilterChanged}
+          lastnameFilterChanged={lastnameFilterChanged}
+          streetaddressFilterChanged={streetaddressFilterChanged}
+          postcodeFilterChanged={postcodeFilterChanged}
+          cityFilterChanged={cityFilterChanged}
+          emailFilterChanged={emailFilterChanged}
+          phoneFilterChanged={phoneFilterChanged}
+          filter={filter}
+        />
+        )}
+         {tabValue === "two" && ( <AddCustomer newCustomer={newCustomer} addCustomerInputChanged={addCustomerInputChanged} addCustomer={addCustomer} />)}
+         {tabValue === "three" && ( <p>Export customer placeolder</p> )}
       <FilterTrainings filter={filter} maxDurationChanged={maxDurationChanged} minDurationChanged={minDurationChanged} activityFilterChanged={activityFilterChanged} dateFilterChanged={dateFilterChanged}/>
 <hr></ hr>
      <table>

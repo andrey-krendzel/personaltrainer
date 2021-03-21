@@ -346,6 +346,7 @@ const addTraining = (event) => {
               </tr>
               </thead>
           {trainings
+           .filter(i => (i.id !== null) && (i.customer.id != null) && (i.date != null) && (i.duration != null) && (i.activity != null))
           .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase()))
           .filter(
             (training) =>

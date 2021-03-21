@@ -502,6 +502,7 @@ function App(props) {
               </tr>
               </thead>
           {customers
+            .filter(i => (i.firstname !== null) && (i.lastname != null) && (i.streetaddress != null) && (i.postcode != null) && (i.city != null) && (i.email != null))
           .filter((customer) => customer.firstname.toLowerCase().includes(filter.firstname.toLowerCase()))
           .filter((customer) => customer.lastname.toLowerCase().includes(filter.lastname.toLowerCase()))
           .filter((customer) => customer.streetaddress.toLowerCase().includes(filter.streetaddress.toLowerCase()))

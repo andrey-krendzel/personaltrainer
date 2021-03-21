@@ -151,7 +151,9 @@ function Trainings(props) {
                   <th></th>
               </tr>
               </thead>
-          {trainings.map((training, index) =>  
+          {trainings
+           .filter(i => (i.date !== null) && (i.duration != null) && (i.activity != null))
+          .map((training, index) =>  
         <tbody>
         <tr key={index}>
          

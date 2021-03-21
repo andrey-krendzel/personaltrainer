@@ -43,12 +43,12 @@
   color: #61dafb;
 }
 
-.filterCustomer,.addCustomer, .filterTrainings {
+.filterCustomer,.addCustomer, .filterTrainings, .addTrainings {
   text-align: left;
   
 }
 
-.addCustomer {
+.addCustomer, .addTrainings {
   margin-left: 2%;
 }
 

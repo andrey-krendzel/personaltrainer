@@ -4,14 +4,17 @@ import { useState } from "react";
 import React from "react";
 import { Button, Table, Card, Accordion } from 'react-bootstrap';
 import TextField from "@material-ui/core/TextField";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 function AddTrainings(props) {
   return (
-    <div className="addTraining">
+    <div className="addTrainings">
       <br />
       <h2> Add new training </h2>
       <TextField
-        name="customerid"
+        name="customerId"
         label="Customer ID"
         onChange={props.addTrainingInputChanged}
         value={props.newTraining.customerId}
@@ -208,7 +211,7 @@ const addTraining = (event) => {
       date: newTraining.date
     }),
   };
-  fetch("https://customerrest.herokuapp.com/api/customers", requestOptions)
+  fetch("https://customerrest.herokuapp.com/api/trainings", requestOptions)
     .then(handleErrors)
     .then((response) => response.json())
     .then((data) => console.log(data))
@@ -223,10 +226,10 @@ const addTraining = (event) => {
   });
 };
 
-// Tabs
-
-
-
+  // Tabs
+  const handleTabChange = (event, tabValue) => {
+    setTabValue(tabValue);
+  };
 
   // Filters
 
@@ -265,21 +268,17 @@ const addTraining = (event) => {
           </Tabs>
         </AppBar>
         {tabValue === "one" && (
-          <FilterCustomer
-          firstnameFilterChanged={firstnameFilterChanged}
-          lastnameFilterChanged={lastnameFilterChanged}
-          streetaddressFilterChanged={streetaddressFilterChanged}
-          postcodeFilterChanged={postcodeFilterChanged}
-          cityFilterChanged={cityFilterChanged}
-          emailFilterChanged={emailFilterChanged}
-          phoneFilterChanged={phoneFilterChanged}
+          <FilterTrainings
+          maxDurationChanged={maxDurationChanged}
+          minDurationChanged={minDurationChanged}
+          activityFilterChanged={activityFilterChanged}
+          dateFilterChanged={dateFilterChanged}
           filter={filter}
         />
         )}
-         {tabValue === "two" && ( <AddCustomer newCustomer={newCustomer} addCustomerInputChanged={addCustomerInputChanged} addCustomer={addCustomer} />)}
+         {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
-      <FilterTrainings filter={filter} maxDurationChanged={maxDurationChanged} minDurationChanged={minDurationChanged} activityFilterChanged={activityFilterChanged} dateFilterChanged={dateFilterChanged}/>
-<hr></ hr>
+      
      <table>
           <thead>
               <tr>

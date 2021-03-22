@@ -72,6 +72,14 @@ function FilterTrainings(props) {
         value={props.filter.customerId}
       ></input>{" "}</td>
       </tr>
+
+      <tr>
+      <td>By training ID:{" "}</td>
+      <td><input
+        onChange={props.trainingIdFilterChanged}
+        value={props.filter.trainingId}
+      ></input>{" "}</td>
+      </tr>
       
         <tr>
       <td>By date:{" "}</td>
@@ -129,6 +137,7 @@ function Trainings(props) {
     duration: { min: 0, max: 1000000 },
     activity: "",
     customerId: "",
+    trainingId: ""
   });
 
 
@@ -272,6 +281,11 @@ const addTraining = (event) => {
     setFilter({ ...filter, customerId: event.target.value });
   };
 
+  const trainingIdFilterChanged = (event) => {
+    setFilter({ ...filter, trainingId: event.target.value });
+  };
+
+
 
 
 
@@ -292,6 +306,7 @@ const addTraining = (event) => {
           activityFilterChanged={activityFilterChanged}
           dateFilterChanged={dateFilterChanged}
           customerIdFilterChanged={customerIdFilterChanged}
+          trainingIdFilterChanged={trainingIdFilterChanged}
           filter={filter}
         />
         )}
@@ -374,6 +389,7 @@ const addTraining = (event) => {
           )
           .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
           .filter((training) => training.customer.id.toString().includes(filter.customerId))
+          .filter((training) => training.id.toString().includes(filter.trainingId))
           .map((training, index) =>  
         <tbody>
         <tr key={index}>

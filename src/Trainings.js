@@ -57,12 +57,13 @@ function FilterTrainings(props) {
   <Card>
     <Card.Header>
       <Accordion.Toggle as={Button} variant="link" eventKey="0">
-        Filter customers
+        Filter trainings
       </Accordion.Toggle>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
       <Card.Body>  
-      <h1> Filter training </h1>
+      <h2> Filter training </h2>
+      <br ></br>
       <table>
         <tr>
       <td>By date:{" "}</td>
@@ -71,25 +72,27 @@ function FilterTrainings(props) {
         value={props.filter.date}
       ></input>{" "}</td>
       </tr>
-      <br />
       <tr>
-      <td>  By duration: Min{" "}</td>
+  
+      <td> Min duration: {" "}</td>
       <td>  <input
       onChange={props.minDurationChanged}
       value={props.filter.duration.min}
     ></input>{" "}</td>
     </tr>
-    Max{" "}
-    <input
+    <tr>
+    <td>Max duration: {" "}</td>
+    <td><input
       onChange={props.maxDurationChanged}
       value={props.filter.duration.max}
-    ></input>{" "}
-    <br />
-      By activity:{" "}
-      <input
+    ></input>{" "}</td>
+    </tr>
+     <tr> <td> By activity:{" "}</td>
+     <td><input
         onChange={props.activityFilterChanged}
         value={props.filter.activity}
-      ></input>{" "}
+      ></input>{" "}</td>
+      </tr>
       <br />
       </table>
       </Card.Body>
@@ -279,11 +282,31 @@ const addTraining = (event) => {
          {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
       
-     <table>
+     <Table striped bordered hover>
           <thead>
               <tr>
                   <th>Training ID </th>
-                  <th>Customer ID </th>
+                  <th>Customer ID    <button
+                type="button"
+                onClick={() => {
+                  setSortedField("customer.id");
+                  setDirection("asc");
+                  console.log(sortedField);
+                }}
+              >
+                Asc
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSortedField("customer.id");
+                  setDirection("desc");
+                  console.log(sortedField);
+                }}
+              >
+                Desc
+              </button></th>
+               
                   <th>Date &nbsp;
               <button
                 type="button"
@@ -365,7 +388,7 @@ const addTraining = (event) => {
           <td><button>Edit</button></td>
           </tr>
           </tbody>)}
-          </table> 
+          </Table> 
     </div>
   );
 }

@@ -223,23 +223,25 @@ const addTrainingInputChanged = (event) => {
 const addTraining = (event) => {
   event.preventDefault();
 
+  
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      customer: "https://customerrest.herokuapp.com/api/customers" + newTraining.customerId,
+      customer: "https://customerrest.herokuapp.com/api/customers/" + newTraining.customerId,
       duration: newTraining.duration,
       activity: newTraining.activity,
       date: newTraining.date
     }),
   };
+
   fetch("https://customerrest.herokuapp.com/api/trainings", requestOptions)
     .then(handleErrors)
     .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
 
-  setUpdate(1)
+    setUpdate(Math.random())
   setNewTraining({
     customerId: "",
     duration: "",

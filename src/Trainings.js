@@ -65,6 +65,14 @@ function FilterTrainings(props) {
       <h2> Filter training </h2>
       <br ></br>
       <table>
+      <tr>
+      <td>By customer ID:{" "}</td>
+      <td><input
+        onChange={props.customerIdFilterChanged}
+        value={props.filter.customerId}
+      ></input>{" "}</td>
+      </tr>
+      
         <tr>
       <td>By date:{" "}</td>
       <td><input
@@ -120,6 +128,7 @@ function Trainings(props) {
     date: "",
     duration: { min: 0, max: 1000000 },
     activity: "",
+    customerId: "",
   });
 
 
@@ -147,6 +156,7 @@ function Trainings(props) {
 
     //Sort magic
   //Dont execute the function if sortedField isn't modified
+  // This function doesn't work with "subfields", i.e. if field is customer.id, it doesn't work.
   if (sortedField != null) {
     if (direction == "asc") {
       //Asc
@@ -258,6 +268,11 @@ const addTraining = (event) => {
     setFilter({ ...filter, date: event.target.value });
   };
 
+  const customerIdFilterChanged = (event) => {
+    setFilter({ ...filter, customerId: event.target.value });
+  };
+
+
 
 
 
@@ -276,6 +291,7 @@ const addTraining = (event) => {
           minDurationChanged={minDurationChanged}
           activityFilterChanged={activityFilterChanged}
           dateFilterChanged={dateFilterChanged}
+          customerIdFilterChanged={customerIdFilterChanged}
           filter={filter}
         />
         )}
@@ -286,26 +302,7 @@ const addTraining = (event) => {
           <thead>
               <tr>
                   <th>Training ID </th>
-                  <th>Customer ID    <button
-                type="button"
-                onClick={() => {
-                  setSortedField("customer.id");
-                  setDirection("asc");
-                  console.log(sortedField);
-                }}
-              >
-                Asc
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setSortedField("customer.id");
-                  setDirection("desc");
-                  console.log(sortedField);
-                }}
-              >
-                Desc
-              </button></th>
+                  <th>Customer ID  </th>
                
                   <th>Date &nbsp;
               <button
@@ -376,6 +373,7 @@ const addTraining = (event) => {
               training.duration > filter.duration.min && training.duration < filter.duration.max
           )
           .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
+          .filter((training) => training.customer.id.toString().includes(filter.customerId))
           .map((training, index) =>  
         <tbody>
         <tr key={index}>

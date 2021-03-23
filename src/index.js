@@ -25,10 +25,7 @@ ReactDOM.render(
       <Nav.Link> <Link to="/trainings" class="nav-link">All trainings</Link></Nav.Link>
       <Nav.Link> <Link to="/pricing" class="nav-link">Pricing</Link></Nav.Link>
     </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-light">Search</Button>
-    </Form>
+   
   </Navbar>
 
     

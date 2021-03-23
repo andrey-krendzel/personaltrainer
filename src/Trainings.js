@@ -210,7 +210,7 @@ function Trainings(props) {
     const newTrainingsList = trainings.filter((item, index) => index !== actualIndex);
     setTrainings(newTrainingsList);
   } else {
-    alert("No customer was deleted!")
+    alert("No training was deleted!")
   }
   };
 
@@ -322,62 +322,72 @@ const addTraining = (event) => {
                   <th>Customer ID  </th>
                
                   <th>Date &nbsp;
-              <button
-                type="button"
+              <Button
+                
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("date");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+              
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("date");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th>Duration &nbsp;
-              <button
-                type="button"
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("duration");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("duration");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th>Activity &nbsp;
-              <button
+              <Button
                 type="button"
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("activity");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("activity");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th></th>
                   <th></th>
               </tr>
@@ -400,8 +410,8 @@ const addTraining = (event) => {
           <td>{training.date}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>
-          <td><button onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</button></td>
-          <td><button>Edit</button></td>
+          <td><Button variant="danger" onClick={() => deleteFunction(training.id, index)}>Delete</Button></td>
+          <td><Button variant="secondary">Edit</Button></td>
           </tr>
           </tbody>)}
           </Table> 

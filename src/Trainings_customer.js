@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import React from "react";
+import { Button, Table, Card, Accordion } from 'react-bootstrap';
 
 
 function Trainings(props) {
@@ -86,67 +87,73 @@ function Trainings(props) {
   return (
     <div className="Trainings">
       <h2>Customer id: <i>{props.location.customerId}</i></h2>
-     <table>
+     <Table striped bordered hover>
           <thead>
               <tr>
-                
+                <th>Training ID &nbsp;</th>
                   <th>Date &nbsp;
-              <button
-                type="button"
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("date");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("date");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th>Duration &nbsp;
-              <button
-                type="button"
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("duration");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("duration");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th>Activity &nbsp;
-              <button
-                type="button"
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("activity");
                   setDirection("asc");
                 }}
               >
                 Asc
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() => {
                   setSortedField("activity");
                   setDirection("desc");
                 }}
               >
                 Desc
-              </button></th>
+              </Button></th>
                   <th></th>
                   <th></th>
               </tr>
@@ -156,7 +163,7 @@ function Trainings(props) {
           .map((training, index) =>  
         <tbody>
         <tr key={index}>
-         
+         <td>{training.links[0].href.split("/")[5]}</td>
           <td>{training.date}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>
@@ -164,7 +171,7 @@ function Trainings(props) {
           <td><button>Edit</button></td>
           </tr>
           </tbody>)}
-          </table> 
+          </Table> 
     </div>
   );
 }

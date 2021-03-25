@@ -8,6 +8,76 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+
+function FilterTrainings(props) {
+  return (
+    <div className="filterTrainings">
+          <Accordion>
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+        Filter trainings
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>  
+      <h2> Filter training </h2>
+      <br ></br>
+      <table>
+      <tr>
+      <td>By customer ID:{" "}</td>
+      <td><input
+        value={props.customerId}
+      ></input>{" "}</td>
+      </tr>
+
+      <tr>
+      <td>By training ID:{" "}</td>
+      <td><input
+        onChange={props.trainingIdFilterChanged}
+        value={props.filter.trainingId}
+      ></input>{" "}</td>
+      </tr>
+      
+        <tr>
+      <td>By date:{" "}</td>
+      <td><input
+        onChange={props.dateFilterChanged}
+        value={props.filter.date}
+      ></input>{" "}</td>
+      </tr>
+      <tr>
+  
+      <td> Min duration: {" "}</td>
+      <td>  <input
+      onChange={props.minDurationChanged}
+      value={props.filter.duration.min}
+    ></input>{" "}</td>
+    </tr>
+    <tr>
+    <td>Max duration: {" "}</td>
+    <td><input
+      onChange={props.maxDurationChanged}
+      value={props.filter.duration.max}
+    ></input>{" "}</td>
+    </tr>
+     <tr> <td> By activity:{" "}</td>
+     <td><input
+        onChange={props.activityFilterChanged}
+        value={props.filter.activity}
+      ></input>{" "}</td>
+      </tr>
+      <br />
+      </table>
+      </Card.Body>
+    </Accordion.Collapse>
+  </Card>
+ 
+</Accordion>
+      </div>
+      )
+}
+
 function AddTrainings(props) {
   return (
     <div className="addTrainings">
@@ -61,6 +131,14 @@ function Trainings(props) {
     activity: "",
     date: "",
   });
+  const [filter, setFilter] = React.useState({
+    date: "",
+    duration: { min: 0, max: 1000000 },
+    activity: "",
+    customerId: "",
+    trainingId: ""
+  });
+
 
     //Errors for fetch
     function handleErrors(response) {
@@ -180,7 +258,7 @@ const addTraining = (event) => {
 
   return (
     <div className="Trainings">
-      <h2>Customer id: <i>{props.location.customerId}</i></h2>
+      
       <AppBar position="static">
           <Tabs value={tabValue} onChange={handleTabChange}>
             <Tab value="one" label="View trainings" />
@@ -191,8 +269,9 @@ const addTraining = (event) => {
         {tabValue === "one" && (
           <p>Filter placeolder</p> 
         )}
-         {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} />)}
+         {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} customerId={props.location.customerId} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
+         <h2>Customer id: <i>{props.location.customerId}</i></h2>
      <Table striped bordered hover>
           <thead>
               <tr>

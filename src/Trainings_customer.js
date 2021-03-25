@@ -28,15 +28,7 @@ function FilterTrainings(props) {
       <td>By customer ID:{" "}</td>
       <td><input
         value={props.customerId}
-      ></input>{" "}</td>
-      </tr>
-
-      <tr>
-      <td>By training ID:{" "}</td>
-      <td><input
-        onChange={props.trainingIdFilterChanged}
-        value={props.filter.trainingId}
-      ></input>{" "}</td>
+      readonly></input>{" "}</td>
       </tr>
       
         <tr>
@@ -138,6 +130,8 @@ function Trainings(props) {
     customerId: "",
     trainingId: ""
   });
+  const id = window.location.pathname.split("/")[2]; 
+  console.log("id " + id);
 
 
     //Errors for fetch
@@ -149,7 +143,7 @@ function Trainings(props) {
     }
 
   React.useEffect(() => {
-    fetch("https://customerrest.herokuapp.com/api/customers/" + props.location.customerId + "/trainings")
+    fetch("https://customerrest.herokuapp.com/api/customers/" + id + "/trainings")
       .then(handleErrors)
       .then((response) => response.json())
       .then((responseData) => {
@@ -175,7 +169,7 @@ const addTraining = (event) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      customer: "https://customerrest.herokuapp.com/api/customers/" + props.location.customerId,
+      customer: "https://customerrest.herokuapp.com/api/customers/" + id,
       duration: newTraining.duration,
       activity: newTraining.activity,
       date: newTraining.date
@@ -303,11 +297,17 @@ const trainingIdFilterChanged = (event) => {
                     dateFilterChanged={dateFilterChanged}
                     trainingIdFilterChanged={trainingIdFilterChanged}
                     filter={filter}
+                    customerId={id}
                   />
         )}
-         {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} customerId={props.location.customerId} />)}
+         {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} customerId={id} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}
-         <h2>Customer id: <i>{props.location.customerId}</i></h2>
+         <br />
+         <div class="customerInfo">
+         <h2>Customer </h2>
+         <p>Id: <i>{id}</i></p>
+         </div>
+         <br />
      <Table striped bordered hover>
           <thead>
               <tr>
@@ -320,9 +320,10 @@ const trainingIdFilterChanged = (event) => {
                   setSortedField("date");
                   setDirection("asc");
                 }}
-              >
+              > 
                 Asc
               </Button>
+              &nbsp;
               <Button
                 variant="outline-primary"
                 size="sm"
@@ -344,6 +345,7 @@ const trainingIdFilterChanged = (event) => {
               >
                 Asc
               </Button>
+              &nbsp; 
               <Button
                 variant="outline-primary"
                 size="sm"
@@ -365,6 +367,7 @@ const trainingIdFilterChanged = (event) => {
               >
                 Asc
               </Button>
+              &nbsp; 
               <Button
                 variant="outline-primary"
                 size="sm"
@@ -381,6 +384,12 @@ const trainingIdFilterChanged = (event) => {
               </thead>
           {trainings
            .filter(i => (i.date !== null) && (i.duration != null) && (i.activity != null))
+           .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase()))
+           .filter(
+             (training) =>
+               training.duration > filter.duration.min && training.duration < filter.duration.max
+           )
+           .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
           .map((training, index) =>  
         <tbody>
         <tr key={index}>

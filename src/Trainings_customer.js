@@ -253,6 +253,35 @@ const addTraining = (event) => {
     setTabValue(tabValue);
   };
 
+ // Filters
+
+ const maxDurationChanged = (event) => {
+  setFilter({
+    ...filter,
+    duration: { min: filter.duration.min, max: event.target.value },
+  });
+};
+
+const minDurationChanged = (event) => {
+  setFilter({
+    ...filter,
+    duration: { max: filter.duration.max, min: event.target.value },
+  });
+};
+
+const activityFilterChanged = (event) => {
+  setFilter({ ...filter, activity: event.target.value });
+};
+
+const dateFilterChanged = (event) => {
+  setFilter({ ...filter, date: event.target.value });
+};
+
+
+const trainingIdFilterChanged = (event) => {
+  setFilter({ ...filter, trainingId: event.target.value });
+};
+
 
 
 
@@ -267,7 +296,14 @@ const addTraining = (event) => {
           </Tabs>
         </AppBar>
         {tabValue === "one" && (
-          <p>Filter placeolder</p> 
+                    <FilterTrainings
+                    maxDurationChanged={maxDurationChanged}
+                    minDurationChanged={minDurationChanged}
+                    activityFilterChanged={activityFilterChanged}
+                    dateFilterChanged={dateFilterChanged}
+                    trainingIdFilterChanged={trainingIdFilterChanged}
+                    filter={filter}
+                  />
         )}
          {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} customerId={props.location.customerId} />)}
          {tabValue === "three" && ( <p>Export customer placeolder</p> )}

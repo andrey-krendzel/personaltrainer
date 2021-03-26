@@ -332,7 +332,7 @@ const addTraining = (event) => {
                 }}
               >
                 Asc
-              </Button>
+              </Button>&nbsp;
               <Button
               
                 variant="outline-primary"
@@ -354,7 +354,7 @@ const addTraining = (event) => {
                 }}
               >
                 Asc
-              </Button>
+              </Button> &nbsp;
               <Button
                 variant="outline-primary"
                 size="sm"
@@ -377,6 +377,7 @@ const addTraining = (event) => {
               >
                 Asc
               </Button>
+              &nbsp;
               <Button
                 type="button"
                 variant="outline-primary"

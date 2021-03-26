@@ -113,7 +113,7 @@ function AddTrainings(props) {
 
 
 function Trainings(props) {
-  const [update, setUpdate] = useState();
+  const [update, setUpdate] = useState(0);
   const [trainings, setTrainings] = useState([]);
   const [sortedField, setSortedField] = React.useState();
   const [direction, setDirection] = React.useState();
@@ -397,8 +397,8 @@ const trainingIdFilterChanged = (event) => {
           <td>{training.date}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>
-          <td><button onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</button></td>
-          <td><button>Edit</button></td>
+          <td><Button variant="danger" onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</Button></td>
+          <td><Button variant="secondary">Edit</Button></td>
           </tr>
           </tbody>)}
           </Table> 

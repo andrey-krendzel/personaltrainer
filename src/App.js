@@ -521,7 +521,14 @@ function App(props) {
           <td>{customer.email}</td>
           <td>{customer.phone}</td>
           <td><Button variant="danger">Delete</Button></td>
-          <td><Button variant="secondary">Edit</Button></td>
+          <td><Button variant="secondary">
+          <Link class="link"
+                      to={{
+                        pathname: "customer/edit/" + customer.links[0].href.split("/")[5],
+                      }}
+                    >
+                      Edit
+                    </Link>{" "}</Button></td>
           <td><Button variant="primary"> <Link class="link"
                       to={{
                         pathname: "/customer/" + customer.links[0].href.split("/")[5],

@@ -9,6 +9,7 @@ import { BrowserRouter as Router,
 import Trainings_customer from './Trainings_customer';
 import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Edit_customer from './Edit_customer';
 
 
 
@@ -34,6 +35,7 @@ ReactDOM.render(
     <Route path = "/trainings" component={Trainings}/>
     <Route path = "/customer/:customerId" component={Trainings_customer}/>
     <Route path = "/pricing" component={Trainings}/>
+    <Route path = "/customer/edit/:customerid" component={Edit_customer}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>
     </div>

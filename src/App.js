@@ -524,7 +524,7 @@ function App(props) {
           <td><Button variant="secondary">
           <Link class="link"
                       to={{
-                        pathname: "customer/edit/" + customer.links[0].href.split("/")[5],
+                        pathname: "/edit/" + customer.links[0].href.split("/")[5],
                       }}
                     >
                       Edit

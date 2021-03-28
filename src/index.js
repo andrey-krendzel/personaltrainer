@@ -24,7 +24,7 @@ ReactDOM.render(
     
       <Nav.Link>  <Link to="/" class="nav-link">All customers</Link></Nav.Link>
       <Nav.Link> <Link to="/trainings" class="nav-link">All trainings</Link></Nav.Link>
-      <Nav.Link> <Link to="/pricing" class="nav-link">Pricing</Link></Nav.Link>
+      <Nav.Link> <Link to="/pricing" class="nav-link">Calendar</Link></Nav.Link>
     </Nav>
    
   </Navbar>
@@ -35,7 +35,7 @@ ReactDOM.render(
     <Route path = "/trainings" component={Trainings}/>
     <Route path = "/customer/:customerId" component={Trainings_customer}/>
     <Route path = "/pricing" component={Trainings}/>
-    <Route path = "/customer/edit/:customerid" component={Edit_customer}/>
+    <Route path = "/edit/:customerid" component={Edit_customer}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>
     </div>

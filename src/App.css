@@ -43,12 +43,17 @@
   color: #61dafb;
 }
 
+.customer-id {
+  color:  #007bff;
+}
+
+
 .filterCustomer,.addCustomer, .filterTrainings, .addTrainings {
   text-align: left;
   
 }
 
-.addCustomer, .addTrainings {
+.addCustomer, .addTrainings, .editCustomer {
   margin-left: 2%;
 }
 

@@ -73,12 +73,15 @@ function Edit_customer(props) {
   };
 
   return (
-    <div>
-      <h1>Edit car</h1>
+    <div class="editCustomer">
+      <br />
+      <h1>Edit customer <span class="customer-id">{id}</span></h1>
 
       <h2>
         <Link to="/">Go back </Link>
       </h2>
+      <br />
+
       <div className="editCustomer">
         <TextField
           name="brand"

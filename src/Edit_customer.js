@@ -84,51 +84,54 @@ function Edit_customer(props) {
 
       <div className="editCustomer">
         <TextField
-          name="brand"
-          label="Brand"
+          name="firstname"
+          label="First name"
           onChange={inputChanged}
           value={customer.firstname}
         />
         <br />
-        <br />
         <TextField
-          name="model"
-          label="Model"
+          name="lastname"
+          label="Last name"
           onChange={inputChanged}
           value={customer.lastname}
         />
+        <br />
         <TextField
-          name="color"
-          label="Color"
+          name="streetaddress"
+          label="Street address"
           onChange={inputChanged}
           value={customer.streetaddress}
         />
+        <br />
         <TextField
-          name="fuel"
-          label="Fuel"
+          name="postcode"
+          label="Post code"
           onChange={inputChanged}
           value={customer.postcode}
         />
+        <br />
         <TextField
-          name="price"
-          label="Price"
+          name="city"
+          label="City"
           onChange={inputChanged}
           value={customer.city}
         />
+        <br />
         <TextField
-          name="year"
-          label="Year"
+          name="email"
+          label="Email"
           onChange={inputChanged}
           value={customer.email}
         />
-
+<br />
 <TextField
-          name="year"
-          label="Year"
+          name="phone"
+          label="Phone"
           onChange={inputChanged}
           value={customer.phone}
         />
-
+<br /><br />
         <Button onClick={editCustomer} variant="contained" color="primary">
           Edit
         </Button>

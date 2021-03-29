@@ -298,6 +298,28 @@ function App(props) {
     });
   };
 
+  const deleteFunction = (customerId, actualIndex) => {
+    
+
+    var r = window.confirm("Are you sure you want to delete this customer?");
+
+    if (r == true) {
+    const requestOptions = {
+      method: "DELETE",
+    };
+
+    //Delete from Server
+    fetch("https://customerrest.herokuapp.com/api/customers/" + customerId, requestOptions);
+
+    // Client-side delete:
+    // customerId = Server Id != index
+    const newCustomersList = customers.filter((item, index) => index !== actualIndex);
+    setCustomers(newCustomersList);
+  } else {
+    alert("No customer was deleted!")
+  }
+  };
+
 
 
   return (
@@ -520,7 +542,7 @@ function App(props) {
           <td>{customer.city}</td>
           <td>{customer.email}</td>
           <td>{customer.phone}</td>
-          <td><Button variant="danger">Delete</Button></td>
+          <td><Button variant="danger" onClick={() => deleteFunction(customer.links[0].href.split("/")[5], index)}>Delete</Button></td>
           <td><Button variant="secondary">
           <Link class="link"
                       to={{

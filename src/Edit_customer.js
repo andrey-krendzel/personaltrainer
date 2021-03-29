@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { Button } from 'react-bootstrap';
 import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
@@ -68,7 +68,7 @@ function Edit_customer(props) {
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
 
-    alert("Car edited");
+    alert("Customer edited");
     props.history.push("/");
   };
 
@@ -132,8 +132,8 @@ function Edit_customer(props) {
           value={customer.phone}
         />
 <br /><br />
-        <Button onClick={editCustomer} variant="contained" color="primary">
-          Edit
+        <Button onClick={editCustomer} variant="primary">
+          Save
         </Button>
         <hr></hr>
       </div>

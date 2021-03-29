@@ -379,7 +379,7 @@ const trainingIdFilterChanged = (event) => {
                 Desc
               </Button></th>
                   <th></th>
-                  <th></th>
+                  
               </tr>
               </thead>
           {trainings
@@ -398,7 +398,7 @@ const trainingIdFilterChanged = (event) => {
           <td>{training.duration}</td>
           <td>{training.activity}</td>
           <td><Button variant="danger" onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</Button></td>
-          <td><Button variant="secondary">Edit</Button></td>
+        
           </tr>
           </tbody>)}
           </Table> 

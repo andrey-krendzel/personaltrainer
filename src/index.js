@@ -19,7 +19,7 @@ ReactDOM.render(
     <div>
       
     <Navbar bg="primary" variant="dark">
-    <Navbar.Brand href="#home">PersonalTrainer</Navbar.Brand>
+    <Navbar.Brand href="/">PersonalTrainer</Navbar.Brand>
     <Nav className="mr-auto">
     
       <Nav.Link>  <Link to="/" class="nav-link">All customers</Link></Nav.Link>

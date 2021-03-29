@@ -390,7 +390,7 @@ const addTraining = (event) => {
                 Desc
               </Button></th>
                   <th></th>
-                  <th></th>
+                  
               </tr>
               </thead>
           {trainings
@@ -412,7 +412,7 @@ const addTraining = (event) => {
           <td>{training.duration}</td>
           <td>{training.activity}</td>
           <td><Button variant="danger" onClick={() => deleteFunction(training.id, index)}>Delete</Button></td>
-          <td><Button variant="secondary">Edit</Button></td>
+          
           </tr>
           </tbody>)}
           </Table> 

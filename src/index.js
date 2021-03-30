@@ -10,6 +10,7 @@ import Trainings_customer from './Trainings_customer';
 import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Edit_customer from './Edit_customer';
+import Training_Calendar from './Training_Calendar';
 
 
 
@@ -24,7 +25,7 @@ ReactDOM.render(
     
       <Nav.Link>  <Link to="/" class="nav-link">All customers</Link></Nav.Link>
       <Nav.Link> <Link to="/trainings" class="nav-link">All trainings</Link></Nav.Link>
-      <Nav.Link> <Link to="/pricing" class="nav-link">Calendar</Link></Nav.Link>
+      <Nav.Link> <Link to="/calendar" class="nav-link">Calendar</Link></Nav.Link>
     </Nav>
    
   </Navbar>
@@ -34,7 +35,7 @@ ReactDOM.render(
     <Route exact path="/"  component={App}/>
     <Route path = "/trainings" component={Trainings}/>
     <Route path = "/customer/:customerId" component={Trainings_customer}/>
-    <Route path = "/pricing" component={Trainings}/>
+    <Route path = "/calendar" component={Training_Calendar}/>
     <Route path = "/edit/:customerid" component={Edit_customer}/>
     <Route render={() => <h1> Page not  found</h1>}/>
     </Switch>

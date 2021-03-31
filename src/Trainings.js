@@ -418,6 +418,9 @@ const addTraining = (event) => {
           </Table> 
     </div>
   );
+
+
 }
+
 
 export default Trainings;

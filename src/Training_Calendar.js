@@ -5,16 +5,24 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import { INITIAL_TRAININGS } from './Trainings'
+import moment from 'moment';
 
 export default class Training_Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
     currentEvents: [],
-    initialEvents: []
+    initialEvents: [],
+    initialDates: [],
   }
 
   componentDidMount() {
+
+    //MomentJS data conversion
+    let weirdDate = "2021-04-01T09:32:24.456+00:00";
+    let correctDate = moment(weirdDate).format("YYYY-MM-DD");
+    console.log("momentjs date + " + correctDate);
+
     fetch("https://customerrest.herokuapp.com/gettrainings")
     .then((response) => response.json())
     .then((responseData) => {
@@ -23,8 +31,22 @@ export default class Training_Calendar extends React.Component {
         initialEvents: responseData
       })
       console.log("initial events + " + this.state.initialEvents)
+
+      this.setState({
+        initialDates: this.state.initialEvents.map(event => moment(event.date).format("YYYY-MM-DD"))
+      })
+      
+      console.log(this.state.initialDates);
+     
     })
     .catch((error) => console.log(error));
+
+ 
+   
+  
+    
+    
+    
 }
 
   handleWeekendsToggle = () => {
@@ -54,7 +76,7 @@ export default class Training_Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={this.state.initalEvents} // alternatively, use the `events` setting to fetch from a feed
+            initialEvents={this.state.initalDates} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}

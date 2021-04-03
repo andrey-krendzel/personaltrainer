@@ -14,14 +14,15 @@ export default class Training_Calendar extends React.Component {
     currentEvents: [],
     initialEvents: [],
     initialDates: [],
+    mappedEvents: []
   }
 
   componentDidMount() {
 
-    //MomentJS data conversion
+    /* MomentJS data conversion
     let weirdDate = "2021-04-01T09:32:24.456+00:00";
     let correctDate = moment(weirdDate).format("YYYY-MM-DD");
-    console.log("momentjs date + " + correctDate);
+    console.log("momentjs date + " + correctDate); */
 
     fetch("https://customerrest.herokuapp.com/gettrainings")
     .then((response) => response.json())
@@ -30,20 +31,20 @@ export default class Training_Calendar extends React.Component {
       this.setState({
         initialEvents: responseData
       })
-      console.log("initial events + " + this.state.initialEvents)
+      //console.log("initial events + " + this.state.initialEvents)
 
-      this.setState({
+     /* this.setState({
         initialDates: this.state.initialEvents.map(event => moment(event.date).format("YYYY-MM-DD"))
       })
       
-      console.log(this.state.initialDates);
+      console.log(this.state.initialDates);*/
      
     })
     .catch((error) => console.log(error));
 
  
    
-  
+  //initialEvents.map(data => {date: data.date, title:data.title))
     
     
     
@@ -76,8 +77,9 @@ export default class Training_Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={this.state.initalDates} // alternatively, use the `events` setting to fetch from a feed
+            //initialEvents={this.state.initalDates} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
+            events={this.state.initialEvents}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed

@@ -14,7 +14,11 @@ export default class Training_Calendar extends React.Component {
     currentEvents: [],
     initialEvents: [],
     initialDates: [],
-    mappedEvents: []
+    transformedEvents: {
+      id:'',
+      date:'',
+      activity:''
+    }
   }
 
   componentDidMount() {
@@ -38,13 +42,26 @@ export default class Training_Calendar extends React.Component {
       })
       
       console.log(this.state.initialDates);*/
+
+      let res = this.state.initialEvents.map((val) => {
+        let id = Object.keys(val)[0]; // Get id
+        let date = Object.keys(val)[1]; // Get date
+        let activity = Object.keys(val)[3]; // Get activity
+        return { // Return the new object structure
+          title: activity,
+          start: date,
+          id: id
+          
+        }
+      });
+
+    console.log(res)
      
     })
     .catch((error) => console.log(error));
 
  
-   
-  //initialEvents.map(data => {date: data.date, title:data.title))
+
     
     
     

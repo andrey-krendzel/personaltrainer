@@ -49,8 +49,7 @@ export default class Training_Calendar extends React.Component {
         let activity = Object.keys(val)[3]; // Get activity
         return { // Return the new object structure
           title: activity,
-          start: date,
-          id: id
+
           
         }
       });

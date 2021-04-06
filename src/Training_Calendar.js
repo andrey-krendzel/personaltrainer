@@ -11,47 +11,43 @@ export default class Training_Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: [],
+
     initialEvents: [],
     initialDates: [],
-    transformedEvents: {
-      id:'',
-      date:'',
-      activity:''
-    }
+
   }
 
   componentDidMount() {
 
-    /* MomentJS data conversion
-    let weirdDate = "2021-04-01T09:32:24.456+00:00";
-    let correctDate = moment(weirdDate).format("YYYY-MM-DD");
-    console.log("momentjs date + " + correctDate); */
 
     fetch("https://customerrest.herokuapp.com/gettrainings")
     .then((response) => response.json())
     .then((responseData) => {
       console.log(responseData);
+
       this.setState({
-        initialEvents: responseData
+        initialEvents: responseData.map(x => {
+          return {
+            id: x.id,
+            title: x.activity + ' (' + x.customer.firstname + ' ' + x.customer.lastname + ')',
+            start: moment(x.date).format("YYYY-MM-DD")
+          };
+        })
       })
-      //console.log("initial events + " + this.state.initialEvents)
 
-     /* this.setState({
-        initialDates: this.state.initialEvents.map(event => moment(event.date).format("YYYY-MM-DD"))
-      })
-      
-      console.log(this.state.initialDates);*/
+      console.log(this.state.initialEvents)
 
+/*
       const mappedEvents = this.state.initialEvents.map(x => {
           return {
-            ...x,
-            activity: "spinning"
+            id: x.id,
+            title: x.activity,
+            start: moment(x.date).format("YYYY-MM-DD")
           };
         });
       
 
-    console.log(mappedEvents)
+    console.log(mappedEvents)*/
      
     })
     .catch((error) => console.log(error));

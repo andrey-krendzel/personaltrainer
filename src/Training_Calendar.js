@@ -43,18 +43,15 @@ export default class Training_Calendar extends React.Component {
       
       console.log(this.state.initialDates);*/
 
-      let res = this.state.initialEvents.map((val) => {
-        let id = Object.keys(val)[0]; // Get id
-        let date = Object.keys(val)[1]; // Get date
-        let activity = Object.keys(val)[3]; // Get activity
-        return { // Return the new object structure
-          title: activity,
+      const mappedEvents = this.state.initialEvents.map(x => {
+          return {
+            ...x,
+            activity: "spinning"
+          };
+        });
+      
 
-          
-        }
-      });
-
-    console.log(res)
+    console.log(mappedEvents)
      
     })
     .catch((error) => console.log(error));

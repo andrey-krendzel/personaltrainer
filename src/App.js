@@ -9,7 +9,7 @@ import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
 import TextField from "@material-ui/core/TextField"
 import { Button, Table, Card, Accordion } from 'react-bootstrap';
-
+import moment from 'moment';
 
 function AddCustomer(props) {
   return (

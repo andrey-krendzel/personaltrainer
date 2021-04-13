@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
+import moment from 'moment';
 
 function FilterTrainings(props) {
   return (
@@ -172,7 +172,7 @@ const addTraining = (event) => {
       customer: "https://customerrest.herokuapp.com/api/customers/" + id,
       duration: newTraining.duration,
       activity: newTraining.activity,
-      date: newTraining.date
+      date: moment(newTraining.date).format()
     }),
   };
 
@@ -394,7 +394,7 @@ const trainingIdFilterChanged = (event) => {
         <tbody>
         <tr key={index}>
          <td>{training.links[0].href.split("/")[5]}</td>
-          <td>{training.date}</td>
+          <td>{moment(training.date).format('MMMM DD YYYY, h:mm')}</td>
           <td>{training.duration}</td>
           <td>{training.activity}</td>
           <td><Button variant="danger" onClick={() => deleteFunction(training.links[0].href.split("/")[5], index)}>Delete</Button></td>

@@ -69,16 +69,16 @@ export default class Training_Calendar extends React.Component {
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             initialView='dayGridMonth'
-            editable={true}
+            //editable={true}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
             //initialEvents={this.state.initalDates} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
+            //select={this.handleDateSelect}
             events={this.state.initialEvents}
             eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
+            //eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             /* you can update a remote database when these fire:
             eventAdd={function(){}}

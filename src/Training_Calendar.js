@@ -24,7 +24,7 @@ export default class Training_Calendar extends React.Component {
       console.log(responseData);
 
       this.setState({
-        initialEvents: responseData.map(x => {
+        initialEvents: responseData.filter(i => (i.customer !== null)).map(x => {
           return {
             id: x.id,
             title: x.activity + ' (' + x.customer.firstname + ' ' + x.customer.lastname + ')',

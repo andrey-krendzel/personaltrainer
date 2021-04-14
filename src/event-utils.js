@@ -3,10 +3,6 @@ let eventGuid = 0
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
 
 
-// Destructuring objects
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-
-
 export const INITIAL_EVENTS = [
   {
     id: createEventId(),

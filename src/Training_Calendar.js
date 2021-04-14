@@ -11,9 +11,7 @@ export default class Training_Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-
     initialEvents: [],
-    initialDates: [],
 
   }
 
@@ -30,24 +28,14 @@ export default class Training_Calendar extends React.Component {
           return {
             id: x.id,
             title: x.activity + ' (' + x.customer.firstname + ' ' + x.customer.lastname + ')',
-            start: moment(x.date).format("YYYY-MM-DD")
+            start: moment(x.date).format("YYYY-MM-DD hh:mm"),
+            end: moment(x.date).add(x.duration, 'minutes').format("YYYY-MM-DD hh:mm")
           };
         })
       })
 
       console.log(this.state.initialEvents)
 
-/*
-      const mappedEvents = this.state.initialEvents.map(x => {
-          return {
-            id: x.id,
-            title: x.activity,
-            start: moment(x.date).format("YYYY-MM-DD")
-          };
-        });
-      
-
-    console.log(mappedEvents)*/
      
     })
     .catch((error) => console.log(error));

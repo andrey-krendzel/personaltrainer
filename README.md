@@ -9,5 +9,5 @@
 
 ## Demo
 
-Coming soon. 
+Deployed version: https://compassionate-panini-6e0fea.netlify.app/
 

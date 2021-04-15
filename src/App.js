@@ -9,7 +9,10 @@ import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
 import TextField from "@material-ui/core/TextField"
 import { Button, Table, Card, Accordion } from 'react-bootstrap';
+import { CSVLink, CSVDownload } from "react-csv";
 import moment from 'moment';
+
+
 
 function AddCustomer(props) {
   return (
@@ -143,6 +146,17 @@ function FilterCustomer(props) {
  
 </Accordion>
    
+    </div>
+  );
+}
+
+function ExportCustomer(props) {
+  return (
+    <div className="exportCustomer">
+      <br/>
+      <h1> Export </h1>
+      <CSVLink data={props.data}>Export in .csv</CSVLink>
+      <hr/>
     </div>
   );
 }
@@ -345,7 +359,17 @@ function App(props) {
         />
         )}
          {tabValue === "two" && ( <AddCustomer newCustomer={newCustomer} addCustomerInputChanged={addCustomerInputChanged} addCustomer={addCustomer} />)}
-         {tabValue === "three" && ( <p>Export customer placeolder</p> )}
+         {tabValue === "three" && (<ExportCustomer
+            data={customers
+          
+          .filter((customer) => customer.firstname.toLowerCase().includes(filter.firstname.toLowerCase()))
+          .filter((customer) => customer.lastname.toLowerCase().includes(filter.lastname.toLowerCase()))
+          .filter((customer) => customer.streetaddress.toLowerCase().includes(filter.streetaddress.toLowerCase()))
+          .filter((customer) => customer.postcode.toLowerCase().includes(filter.postcode.toLowerCase()))
+          .filter((customer) => customer.city.toLowerCase().includes(filter.city.toLowerCase()))
+          .filter((customer) => customer.email.toLowerCase().includes(filter.email.toLowerCase()))
+              }
+          /> )}
 
   
 

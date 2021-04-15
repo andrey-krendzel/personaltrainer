@@ -48,12 +48,12 @@
 }
 
 
-.filterCustomer,.addCustomer, .filterTrainings, .addTrainings {
+.filterCustomer,.addCustomer, .filterTrainings, .addTrainings, .exportCustomer {
   text-align: left;
   
 }
 
-.addCustomer, .addTrainings, .editCustomer {
+.addCustomer, .addTrainings, .editCustomer, .exportCustomer {
   margin-left: 2%;
 }
 

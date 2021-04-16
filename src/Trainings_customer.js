@@ -97,7 +97,7 @@ function AddTrainings(props) {
        <br />
       <TextField
         name="date"
-        label="Date"
+        label="Date MM/DD/YYYY"
         onChange={props.addTrainingInputChanged}
         value={props.newTraining.date}
       />
@@ -164,6 +164,8 @@ const addTrainingInputChanged = (event) => {
 const addTraining = (event) => {
   event.preventDefault();
 
+  // Date example: 2021-04-16T07:31:17.691+00:00
+  console.log("date: " + moment(newTraining.date).format())
   
   const requestOptions = {
     method: "POST",
@@ -175,6 +177,7 @@ const addTraining = (event) => {
       date: moment(newTraining.date).format()
     }),
   };
+
 
   fetch("https://customerrest.herokuapp.com/api/trainings", requestOptions)
     .then(handleErrors)

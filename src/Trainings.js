@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { CSVLink, CSVDownload } from "react-csv";
 import moment from 'moment';
 
 function AddTrainings(props) {
@@ -37,7 +38,7 @@ function AddTrainings(props) {
        <br />
       <TextField
         name="date"
-        label="Date"
+        label="Date MM/DD/YYYY"
         onChange={props.addTrainingInputChanged}
         value={props.newTraining.date}
       />
@@ -119,6 +120,17 @@ function FilterTrainings(props) {
 </Accordion>
       </div>
       )
+}
+
+function ExportTrainings(props) {
+  return (
+    <div className="exportTrainings">
+      <br/>
+      <h1> Export </h1>
+      <CSVLink data={props.data}>Export in .csv</CSVLink>
+      <hr/>
+    </div>
+  );
 }
 
 function Trainings(props) {
@@ -240,10 +252,13 @@ const addTraining = (event) => {
   fetch("https://customerrest.herokuapp.com/api/trainings", requestOptions)
     .then(handleErrors)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data)
+      setUpdate(Math.random())
+    })
     .catch((error) => console.log(error));
 
-    setUpdate(Math.random())
+    
   setNewTraining({
     customerId: "",
     duration: "",
@@ -315,7 +330,20 @@ const addTraining = (event) => {
         />
         )}
          {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} />)}
-         {tabValue === "three" && ( <p>Export customer placeolder</p> )}
+         {tabValue === "three" && (<ExportTrainings
+            data={trainings
+          
+              .filter(i => (i.id !== null) && (i.customer != null) && (i.date != null) && (i.duration != null) && (i.activity != null))
+              .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase()))
+              .filter(
+                (training) =>
+                  training.duration > filter.duration.min && training.duration < filter.duration.max
+              )
+              .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
+              .filter((training) => training.customer.id.toString().includes(filter.customerId))
+              .filter((training) => training.id.toString().includes(filter.trainingId))
+              }
+          /> )}
       
      <Table striped bordered hover>
           <thead>

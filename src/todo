@@ -5,6 +5,10 @@ https://github.com/recharts/recharts
 
 Deploy your app to some cloud server Done
 - Remove export
-- Add demo to github
-- Add last part 3 moodle
-- Add trainings to customer, there's no addition to the server, bad request
+- Add demo to github DONE
+- Add last part 3 moodle DONE
+- Add trainings to customer, there's no addition to the server, bad request DONE
+- Check that useEffect works as intended DONE
+- Validators: 
+-- Duration is a number
+-- Date is in ISO format

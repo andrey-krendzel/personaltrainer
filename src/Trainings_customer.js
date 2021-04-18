@@ -8,6 +8,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import moment from 'moment';
+import { CSVLink, CSVDownload } from "react-csv";
 
 function FilterTrainings(props) {
   return (
@@ -107,6 +108,17 @@ function AddTrainings(props) {
         Add training
       </Button>
       <hr></hr>
+    </div>
+  );
+}
+
+function ExportTrainings(props) {
+  return (
+    <div className="exportTrainings">
+      <br/>
+      <h1> Export </h1>
+      <CSVLink data={props.data}>Export in .csv</CSVLink>
+      <hr/>
     </div>
   );
 }
@@ -304,7 +316,18 @@ const trainingIdFilterChanged = (event) => {
                   />
         )}
          {tabValue === "two" && ( <AddTrainings newTraining={newTraining} addTrainingInputChanged={addTrainingInputChanged} addTraining={addTraining} customerId={id} />)}
-         {tabValue === "three" && ( <p>Export customer placeolder</p> )}
+         {tabValue === "three" && ( <ExportTrainings
+            data={trainings
+          
+              .filter(i => (i.date !== null) && (i.duration != null) && (i.activity != null))
+           .filter((training) => training.date.toLowerCase().includes(filter.date.toLowerCase()))
+           .filter(
+             (training) =>
+               training.duration > filter.duration.min && training.duration < filter.duration.max
+           )
+           .filter((training) => training.activity.toLowerCase().includes(filter.activity.toLowerCase()))
+              }
+          /> )}
          <br />
          <div class="customerInfo">
          <h2>Customer </h2>
